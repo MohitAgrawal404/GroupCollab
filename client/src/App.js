@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import {useState} from "react";
 import {signOut} from 'firebase/auth'
-import {auth} from "./firebase-config";
+import {auth} from "./backend/firebase";
 import {Login} from "./Login"
 import {Dashboard} from "./Dashboard"
 import {Preferences} from "./Preferences"
