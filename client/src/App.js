@@ -265,11 +265,13 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Videochat from "./component/Videochat";
+import { CalendarDash } from "./pages/CalendarDash";
 
 function App() {
   return (
     <div className="App">
-      <Videochat></Videochat>
+      <Videochat />
+      <CalendarDash />
     </div>
   );
 }
