@@ -2,6 +2,8 @@ import React from 'react'
 
 export const Preferences = () => {
   return (
-    <div>Preferences</div>
+    <div>
+      <h1>THIS IS PREFERENCES</h1>
+    </div>
   )
 }
