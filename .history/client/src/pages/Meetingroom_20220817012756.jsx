@@ -4,7 +4,7 @@ import Videochat from "../component/Videochat";
 export const Meetingroom = () => {
   return (
     <div>
-      <Videochat />
+      <h1>THIS IS MEETING ROOM</h1>
     </div>
   );
 };
