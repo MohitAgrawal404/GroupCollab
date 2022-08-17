@@ -2,10 +2,10 @@ import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import {useState} from "react";
 import {signOut} from 'firebase/auth'
 import {auth} from "./backend/firebase";
-import {Login} from "./Login"
-import {Dashboard} from "./Dashboard"
-import {Preferences} from "./Preferences"
-import {MeetingRoom} from "./MeetingRoom"
+import {Login} from "./pages/Login"
+import {Dashboard} from "./pages/Dashboard"
+import {Preferences} from "./pages/Preferences"
+import { Meetingroom } from "./pages/Meetingroom";
 
 
 function App() {
@@ -19,23 +19,23 @@ function App() {
   }
 
   return (
-    <div className="">
+    <div className="App">
     <Router className = "">
       <nav className= "">
-        {!isAuth ? <Link className=''  to={"/Login"}> Login </Link> : (
+        {!isAuth ? <Link className=''  to={"/login"}> Login </Link> : (
           <>
-        <Link to ={"/Dashboard"} className = ""> Dashboard </Link>
-        <Link to={"/Meeting Room"} className = ""> Meeting Room </Link>
-        <Link to={"/Preferences"} className = ""> Preferences </Link>
+        <Link to ={"/dashboard"} className = ""> Dashboard </Link>
+        <Link to={"/meetingroom"} className = ""> Meeting Room </Link>
+        <Link to={"/preferences"} className = ""> Preferences </Link>
         <button className= "" onClick = {signuserOut}>LOG OUT</button>
         </>
         )}
       </nav>
       <Routes>
-        <Route path = "/Login" element = {<Login isAuth = {isAuth} />} />
-        <Route path = "/Preferences" element = {<Preferences isAuth={isAuth}/>} />
-        <Route path = "/Dashboard" element = {<Dashboard isAuth={isAuth}/>} />
-        <Route path = "/Meeting Room" element = {<MeetingRoom setIsAuth={setIsAuth}/>} />
+        <Route path = "/login" element = {<Login isAuth = {isAuth} />} />
+        <Route path = "/preferences" element = {<Preferences isAuth={isAuth}/>} />
+        <Route path = "/dashboard" element = {<Dashboard isAuth={isAuth}/>} />
+        <Route path = "/meetingroom" element = {<Meetingroom setIsAuth={setIsAuth}/>} />
       </Routes>
     </Router>
     </div>
