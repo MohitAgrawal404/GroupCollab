@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { auth } from "../backend/firebase";
 import { connect } from "react-redux";
 
-function Meetingroom() {
+export const Meetingroom = () => {
   useEffect(() => {
     const participantsref = dbref.child("participants");
     connectedref.on("value", (snap) => {
@@ -26,10 +26,4 @@ function Meetingroom() {
       {username}
     </div>
   );
-}
-
-const mapStateToProps = (state) => {};
-
-const mapDispatchToProps = (dispatch) => {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Meetingroom);
+};

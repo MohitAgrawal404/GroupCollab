@@ -5,9 +5,14 @@ import { auth } from "./backend/firebase";
 import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
 import { Preferences } from "./pages/Preferences";
-// import { Meetingroom } from "./pages/Meetingroom";
+import { Meetingroom } from "./pages/Meetingroom";
 import { Events } from "./pages/Events";
-import Meetingroom from "./pages/Meetingroom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import { reducer } from "./store/reducer";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+const store = createStore(reducer);
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));

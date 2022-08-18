@@ -5,9 +5,8 @@ import { auth } from "./backend/firebase";
 import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
 import { Preferences } from "./pages/Preferences";
-// import { Meetingroom } from "./pages/Meetingroom";
+import { Meetingroom } from "./pages/Meetingroom";
 import { Events } from "./pages/Events";
-import Meetingroom from "./pages/Meetingroom";
 
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
