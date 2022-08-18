@@ -7,19 +7,19 @@ import {Dashboard} from "./pages/Dashboard"
 import {Preferences} from "./pages/Preferences"
 import { Meetingroom } from "./pages/Meetingroom";
 
-
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
+
 
   const signuserOut = () => {
     signOut(auth).then(() => {
       localStorage.clear();
       setIsAuth(false);
+
     })
   }
 
   return (
-    <div className="App">
     <Router className = "">
       <nav className= "">
         {!isAuth ? <Link className=''  to={"/login"}> Login </Link> : (
@@ -27,18 +27,17 @@ function App() {
         <Link to ={"/dashboard"} className = ""> Dashboard </Link>
         <Link to={"/meetingroom"} className = ""> Meeting Room </Link>
         <Link to={"/preferences"} className = ""> Preferences </Link>
-        <button className= "" onClick = {signuserOut}>LOG OUT</button>
+        <Link to = {"/login"} className= "" onClick = {signuserOut}>LOG OUT</Link>
         </>
         )}
       </nav>
       <Routes>
-        <Route path = "/login" element = {<Login isAuth = {isAuth} />} />
+        <Route path = "/login" element = {<Login setIsAuth={setIsAuth} />} />
         <Route path = "/preferences" element = {<Preferences isAuth={isAuth}/>} />
         <Route path = "/dashboard" element = {<Dashboard isAuth={isAuth}/>} />
-        <Route path = "/meetingroom" element = {<Meetingroom setIsAuth={setIsAuth}/>} />
+        <Route path = "/meetingroom" element = {<Meetingroom isAuth={isAuth}/>} />
       </Routes>
     </Router>
-    </div>
   );
 }
 
