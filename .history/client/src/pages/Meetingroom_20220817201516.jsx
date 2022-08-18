@@ -9,11 +9,7 @@ export const Meetingroom = () => {
     connectedref.on("value", (snap) => {
       if (snap.val()) {
         const defaultPreference = { audio: true, video: false, screen: false };
-        const userRef = participantsref.push({
-          username,
-          preference: defaultPreference,
-        });
-        userRef.onDisconnect().remove();
+        participantsref.push({ username, preference: defaultPreference });
       }
     });
   }, []);

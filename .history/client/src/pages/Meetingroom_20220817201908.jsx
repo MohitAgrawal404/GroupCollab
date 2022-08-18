@@ -13,7 +13,6 @@ export const Meetingroom = () => {
           username,
           preference: defaultPreference,
         });
-        userRef.onDisconnect().remove();
       }
     });
   }, []);

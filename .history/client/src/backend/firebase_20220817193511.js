@@ -21,7 +21,13 @@ if (!firebase.apps.length) {
 const app = initializeApp(firebaseConfig);
 export const firestore = firebase.firestore();
 export const db = getFirestore(app);
+const dbref = firebase.database().ref();
 export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider();
+const urlParams = new URLSearchParams(window.location.search);
+const roomID = urlParams.get("id");
+if (roomID) {
+  dbre;
+}
 
 export default firebaseConfig;

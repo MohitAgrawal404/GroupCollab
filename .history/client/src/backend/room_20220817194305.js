@@ -19,9 +19,15 @@ if (!firebase.apps.length) {
 }
 
 const app = initializeApp(firebaseConfig);
-export const firestore = firebase.firestore();
-export const db = getFirestore(app);
-export const auth = getAuth(app);
-export const provider = new GoogleAuthProvider();
 
-export default firebaseConfig;
+const dbref = firebase.database().ref();
+const urlParams = new URLSearchParams(window.location.search);
+const roomID = urlParams.get("id");
+if (roomID) {
+  dbref = dbref.child(roomID);
+} else {
+  dbref = dbref.push();
+  window.history.replaceState(null, "Meet", "?id=" + dbref.key);
+}
+
+export default dbref;
