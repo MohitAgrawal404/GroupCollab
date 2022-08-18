@@ -7,14 +7,12 @@ import React, { useState } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { ReactNotifications } from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
-import { store } from "react-notifications-component";
 import "./PagesContent.css";
 import { MdLibraryAdd } from "react-icons/md";
 import { GrUndo } from "react-icons/gr";
 import { CalendarForm } from "./CalendarForm";
-
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const iconSize = 30;
 const events = [];
@@ -23,39 +21,26 @@ var startTime;
 var endTime;
 
 const handleSuccessNotification = (message) => {
-  store.addNotification({
-    title: "Successful!",
-    message: message,
-    type: "success",
-    insert: "top",
-    container: "top-center",
-    animationIn: ["animate__animated", "animate__fadeIn"],
-    animationOut: ["animate__animated", "animate__fadeOut"],
-    dismiss: {
-      duration: 2000,
-      onScreen: true,
-      showIcon: true,
-      pauseOnHover: true,
-    },
+  toast.success(message, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
   });
 };
 
 const handleWarningNotification = (message) => {
-  store.addNotification({
-    title: "Incorrect / Missing Fields!",
-    message: message,
-    type: "warning",
-    insert: "bottom",
-    container: "top-center",
-    animationIn: ["animate__animated", "animate__fadeIn"],
-    animationOut: ["animate__animated", "animate__fadeOut"],
-    dismiss: {
-      duration: 2000,
-      onScreen: true,
-      showIcon: true,
-      pauseOnHover: true,
-    },
-    width: 50,
+  toast.warn(message, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
   });
 };
 
@@ -381,7 +366,7 @@ export const CalendarEvents = ({ scheduler }) => {
         )}
         {addButtonName()}
       </button>
-      <ReactNotifications />
+      <ToastContainer />
       {eventForm ? (
         <div className="eventForm-container">
           <CalendarForm

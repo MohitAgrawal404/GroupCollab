@@ -8,7 +8,6 @@ import { Preferences } from "./pages/Preferences";
 // import { Meetingroom } from "./pages/Meetingroom";
 
 import Meetingroom from "./pages/Meetingroom";
-import { CalendarEvents } from "./pages/CalendarEvents";
 
 
 function App() {
