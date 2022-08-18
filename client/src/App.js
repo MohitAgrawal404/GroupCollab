@@ -9,12 +9,14 @@ import { Preferences } from "./pages/Preferences";
 import { Events } from "./pages/Events";
 import Meetingroom from "./pages/Meetingroom";
 
+
 function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
 
   const signuserOut = () => {
     signOut(auth).then(() => {
       localStorage.clear();
+
       setIsAuth(false);
     });
   };
