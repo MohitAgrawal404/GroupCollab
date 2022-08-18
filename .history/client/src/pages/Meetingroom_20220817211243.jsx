@@ -5,13 +5,16 @@ import { useEffect } from "react";
 import { auth } from "../backend/firebase";
 
 export const Meetingroom = () => {
+  // console.log(auth.currentUser.displayName);
+
   useEffect(() => {
+    const author = { name: auth.currentUser.displayName };
     const participantsref = dbref.child("participants");
     connectedref.on("value", (snap) => {
       if (snap.val()) {
         const defaultPreference = { audio: true, video: false, screen: false };
         const userRef = participantsref.push({
-          username,
+          author,
           preference: defaultPreference,
         });
         userRef.onDisconnect().remove();

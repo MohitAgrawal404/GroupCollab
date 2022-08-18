@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { auth } from "../backend/firebase";
 
 export const Meetingroom = () => {
+  const user = auth.currentUser.displayName;
   useEffect(() => {
     const participantsref = dbref.child("participants");
     connectedref.on("value", (snap) => {
@@ -22,7 +23,7 @@ export const Meetingroom = () => {
   return (
     <div>
       {/* <Videochat /> */}
-      {username}
+      {auth.currentUser.displayName}
     </div>
   );
 };

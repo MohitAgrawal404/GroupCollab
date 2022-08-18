@@ -2,7 +2,6 @@ import React from "react";
 import Videochat from "../component/Videochat";
 import dbref, { username, connectedref } from "../backend/room";
 import { useEffect } from "react";
-import { auth } from "../backend/firebase";
 
 export const Meetingroom = () => {
   useEffect(() => {

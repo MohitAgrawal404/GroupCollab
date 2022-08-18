@@ -1,11 +1,15 @@
 import React from "react";
 import Videochat from "../component/Videochat";
-import dbref, { username, connectedref } from "../backend/room";
+import dbref, { connectedref } from "../backend/room";
 import { useEffect } from "react";
 import { auth } from "../backend/firebase";
 
 export const Meetingroom = () => {
+  // console.log(auth.currentUser.displayName);
+
   useEffect(() => {
+    const username = auth.currentUser.displayName;
+    console.log(username);
     const participantsref = dbref.child("participants");
     connectedref.on("value", (snap) => {
       if (snap.val()) {
@@ -19,10 +23,5 @@ export const Meetingroom = () => {
     });
   }, []);
 
-  return (
-    <div>
-      {/* <Videochat /> */}
-      {username}
-    </div>
-  );
+  return <div>{/* <Videochat /> */}</div>;
 };
