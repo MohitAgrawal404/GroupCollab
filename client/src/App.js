@@ -6,8 +6,9 @@ import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
 import { Preferences } from "./pages/Preferences";
 // import { Meetingroom } from "./pages/Meetingroom";
-import { Events } from "./pages/Events";
+
 import Meetingroom from "./pages/Meetingroom";
+import { CalendarEvents } from "./pages/CalendarEvents";
 
 
 function App() {
@@ -54,7 +55,6 @@ function App() {
         <Route path="/preferences" element={<Preferences isAuth={isAuth} />} />
         <Route path="/dashboard" element={<Dashboard isAuth={isAuth} />} />
         <Route path="/meetingroom" element={<Meetingroom isAuth={isAuth} />} />
-        <Route path="/events" element={<Events isAuth={isAuth} />} />
       </Routes>
     </Router>
   );
