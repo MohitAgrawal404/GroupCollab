@@ -1,0 +1,285 @@
+.todo-app {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: calc(100% - 5%);
+    max-width: 550px;
+    min-height: calc(100% - 30%);
+    background: #161a2b;
+    text-align: center;
+    margin: 60px auto 150px auto;
+    border-radius: 10px;
+    padding-bottom: 32px;
+    min-width: 215px;
+  }
+  
+  .eventForm-container {
+    display: block;
+    position: fixed;
+    width: calc(100%);
+    max-width: 365px;
+    min-height: calc(100% - 70%);
+    background: #161a2b;
+    border-radius: 10px;
+    padding-bottom: 32px;
+    margin: 40px auto 0px auto;
+    z-index: 5;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    right: 50%;
+    min-width: 215px;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+  }
+  
+  .todo-list-title {
+    margin: 32px 0;
+    color: #fff;
+    font-size: 26px;
+  }
+  
+  .complete {
+    text-decoration: line-through;
+    opacity: 0.4;
+  }
+  .event-iput.time.end.allday,
+  .event-iput.day.end.allday {
+    opacity: 0.4;
+  }
+  .todo-form {
+    margin-bottom: 32px;
+  }
+  
+  .todo-input,
+  .event-iput {
+    padding: 9px 32px 13px 16px;
+    border-radius: 4px 0 0 4px;
+    border: 2px solid #5d0cff;
+    outline: none;
+    width: calc(100% - 30%);
+    background: transparent;
+    color: #fff;
+    font-size: 18px;
+  }
+  
+  .allday-checkbox {
+    margin: 8px auto 8px 8px;
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .event-iput {
+    padding: 9px 15px 13px 16px;
+    align-items: left;
+    border-radius: 4px;
+    width: calc(100%);
+  }
+  .event-iput.time {
+    width: calc(100% - 30%);
+    width: 140px;
+  }
+  
+  label {
+    position: relative;
+    padding: 9px 10px 13px 16px;
+    width: calc(100% - 28%);
+    color: #fff;
+    font-size: 18px;
+  }
+  
+  .todo-input::placeholder,
+  .event-iput::placeholder {
+    color: #fff;
+  }
+  
+  .todo-button,
+  .addEvent-button,
+  .addEvent-onForm,
+  .deleteEvent-onForm {
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    outline: none;
+    background: linear-gradient(
+      90deg,
+      rgba(93, 12, 255, 1) 0%,
+      rgba(155, 0, 250, 1) 100%
+    );
+    color: #fff;
+    text-transform: capitalize;
+    padding: 4px 7px 4px 7px;
+    vertical-align: middle;
+    margin-bottom: 2px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    font-size: 20px;
+  }
+  
+  .addEvent-button,
+  .addEvent-onForm,
+  .deleteEvent-onForm {
+    position: inline-flex;
+    border-radius: 4px;
+    padding: 7px;
+    margin-top: 1.5rem;
+    margin-bottom: -1.5rem;
+  }
+  
+  .todo-input.edit {
+    padding: 9px 32px 13px 16px;
+    font-size: 18px;
+    border: 2px solid #149fff;
+  }
+  
+  .todo-button.edit {
+    background: linear-gradient(
+      90deg,
+      rgba(20, 159, 255, 1) 0%,
+      rgba(17, 122, 255, 1) 100%
+    );
+    padding: 4px 7px 4px 7px;
+    vertical-align: middle;
+    margin-bottom: 2px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    font-size: 20px;
+  }
+  
+  .todo-container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+  }
+  
+  .todo-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4px auto;
+    color: #fff;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 118, 20, 1) 0%,
+      rgba(255, 84, 17, 1) 100%
+    );
+  
+    padding: 16px;
+    border-radius: 5px;
+    width: 90%;
+  }
+  
+  .todo-list-item {
+    font-size: 18px;
+    display: block;
+    text-align: left;
+    width: calc(100%);
+    max-width: 360px;
+    word-wrap: break-word;
+  }
+  
+  .todo-row:nth-child(4n + 1) {
+    background: linear-gradient(
+      90deg,
+      rgba(93, 12, 255, 1) 0%,
+      rgba(155, 0, 250, 1) 100%
+    );
+  }
+  
+  .todo-row:nth-child(4n + 2) {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 12, 241, 1) 0%,
+      rgba(250, 0, 135, 1) 100%
+    );
+  }
+  
+  .todo-row:nth-child(4n + 3) {
+    background: linear-gradient(
+      90deg,
+      rgba(20, 159, 255, 1) 0%,
+      rgba(17, 122, 255, 1) 100%
+    );
+  }
+  
+  .icons {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  .delete-icon {
+    margin-left: 6px;
+    margin-right: 10px;
+  }
+  .complete-icon {
+    margin-left: 6px;
+  }
+  
+  .addEvent-icon {
+    margin-right: 10px;
+  }
+  
+  input[type="checkbox"] {
+    transform: scale(2);
+  }
+  
+  .addEvent-title {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .addEvent-onForm,
+  .deleteEvent-onForm {
+    display: inline-flex;
+    margin: 1rem 31px -1rem 0px;
+    justify-content: space-evenly;
+  }
+  
+  .Event {
+    margin: 0px 10px 40px 10px;
+  }
+  
+  .calendar {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  
+  .table {
+    width: calc(100% - 30%);
+  }
+  
+  @media only screen and (max-width: 800px) {
+    label {
+      display: inline-flex;
+      padding: 0px 10px 0px 16px;
+    }
+  
+    .todo-row {
+      display: inline-block;
+      flex-direction: column;
+      justify-content: start;
+    }
+    .icons {
+      display: flex;
+      justify-content: space-evenly;
+      margin: 0.5rem 0rem 0rem auto;
+      width: 100px;
+    }
+    .todo-list-item {
+      max-width: 450px;
+    }
+  
+    input[type="checkbox"] {
+      transform: scale(2.5);
+    }
+  
+    .allday-checkbox {
+      margin: 8px auto 0px 10px;
+      border-radius: 4px 0 0 4px;
+    }
+  }
+  
