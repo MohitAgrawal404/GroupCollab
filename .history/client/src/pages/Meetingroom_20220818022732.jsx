@@ -4,11 +4,7 @@ import dbref, { username, connectedref } from "../backend/room";
 import { useEffect } from "react";
 import { auth } from "../backend/firebase";
 import { connect } from "react-redux";
-import {
-  setUser,
-  addParticipant,
-  removeParticipant,
-} from "../store/actioncreator";
+import { setUser } from "../store/actioncreator";
 
 function Meetingroom() {
   useEffect(() => {

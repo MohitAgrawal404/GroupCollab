@@ -4,11 +4,6 @@ import dbref, { username, connectedref } from "../backend/room";
 import { useEffect } from "react";
 import { auth } from "../backend/firebase";
 import { connect } from "react-redux";
-import {
-  setUser,
-  addParticipant,
-  removeParticipant,
-} from "../store/actioncreator";
 
 function Meetingroom() {
   useEffect(() => {
@@ -34,17 +29,12 @@ function Meetingroom() {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    user: state.currentUser,
-  };
+  return;
+  {
+    user: state.currentUser;
+  }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setUser: (user) => dispatch(setUser(user)),
-    setUser: (user) => dispatch(addParticipant(user)),
-    setUser: (user) => dispatch(removeParticipant(user)),
-  };
-};
+const mapDispatchToProps = (dispatch) => {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Meetingroom);
