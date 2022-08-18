@@ -11,8 +11,8 @@ import {
 } from "../store/actioncreator";
 
 function Meetingroom(props) {
-  const participantsref = dbref.child("participants");
   useEffect(() => {
+    const participantsref = dbref.child("participants");
     connectedref.on("value", (snap) => {
       if (snap.val()) {
         const defaultPreference = { audio: true, video: false, screen: false };
@@ -32,6 +32,7 @@ function Meetingroom(props) {
       }
     });
   }, []);
+
   useEffect(() => {
     if (props.user) {
       participantsref.on("child_added", (snap) => {

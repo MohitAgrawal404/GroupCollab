@@ -11,8 +11,8 @@ import {
 } from "../store/actioncreator";
 
 function Meetingroom(props) {
-  const participantsref = dbref.child("participants");
   useEffect(() => {
+    const participantsref = dbref.child("participants");
     connectedref.on("value", (snap) => {
       if (snap.val()) {
         const defaultPreference = { audio: true, video: false, screen: false };
@@ -31,18 +31,14 @@ function Meetingroom(props) {
         userRef.onDisconnect().remove();
       }
     });
+    participantsref.on("child_added", (snap) => {
+      const { username, preference } = snap.val();
+      props.addParticipant({ [snap.key]: { username, ...preference } });
+    });
+    participantsref.on("child_removed", (snap) => {
+      props.removeParticipant(snap.key);
+    });
   }, []);
-  useEffect(() => {
-    if (props.user) {
-      participantsref.on("child_added", (snap) => {
-        const { username, preference } = snap.val();
-        props.addParticipant({ [snap.key]: { username, ...preference } });
-      });
-      participantsref.on("child_removed", (snap) => {
-        props.removeParticipant(snap.key);
-      });
-    }
-  }, [props.user]);
 
   return (
     <div>

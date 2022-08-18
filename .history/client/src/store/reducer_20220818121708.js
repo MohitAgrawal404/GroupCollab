@@ -25,9 +25,7 @@ export const reducer = (state = initialState, action) => {
     }
     case REMOVE_PARTICIPANT: {
       let { payload } = action;
-      let participants = { ...state.participants };
-      delete participants[payload.participantKey];
-      state = { ...state, participants };
+      state = { ...state, currentUser: { ...payload.currentUser } };
       return state;
     }
     default: {
