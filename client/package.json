@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@marinos33/react-week-time-range-picker": "^2.0.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "@wojtekmaj/react-timerange-picker": "^3.5.0",
     "date-fns": "^2.29.1",
     "firebase": "^9.9.2",
     "react": "^18.2.0",
@@ -19,7 +21,9 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-time-picker": "^4.5.0",
+    "react-weekly-scheduler": "^0.0.1",
     "redux": "^4.2.0",
+    "resize-observer-polyfill": "^1.5.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
