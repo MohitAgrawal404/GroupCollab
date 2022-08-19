@@ -29,44 +29,46 @@ function App() {
   return (
     <Provider store={store}>
       <Router className="">
-        <nav className="">
-          {!isAuth ? (
-            <Link className="" to={"/login"}>
-              {" "}
-              Login{" "}
-            </Link>
-          ) : (
-            <>
-              <Link to={"/dashboard"} className="">
+        <div className="h-screen w-screen bg-slate-600">
+          <nav className="">
+            {!isAuth ? (
+              <Link className="" to={"/login"}>
                 {" "}
-                Dashboard{" "}
+                Login{" "}
               </Link>
-              <Link to={"/meetingroom"} className="">
-                {" "}
-                Meeting Room{" "}
-              </Link>
-              <Link to={"/preferences"} className="">
-                {" "}
-                Preferences{" "}
-              </Link>
-              <Link to={"/login"} className="" onClick={signuserOut}>
-                LOG OUT
-              </Link>
-            </>
-          )}
-        </nav>
-        <Routes>
-          <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
-          <Route
-            path="/preferences"
-            element={<Preferences isAuth={isAuth} />}
-          />
-          <Route path="/dashboard" element={<Dashboard isAuth={isAuth} />} />
-          <Route
-            path="/meetingroom"
-            element={<Meetingroom isAuth={isAuth} />}
-          />
-        </Routes>
+            ) : (
+              <>
+                <Link to={"/dashboard"} className="">
+                  {" "}
+                  Dashboard{" "}
+                </Link>
+                <Link to={"/meetingroom"} className="">
+                  {" "}
+                  Meeting Room{" "}
+                </Link>
+                <Link to={"/preferences"} className="">
+                  {" "}
+                  Preferences{" "}
+                </Link>
+                <Link to={"/login"} className="" onClick={signuserOut}>
+                  LOG OUT
+                </Link>
+              </>
+            )}
+          </nav>
+          <Routes>
+            <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
+            <Route
+              path="/preferences"
+              element={<Preferences isAuth={isAuth} />}
+            />
+            <Route path="/dashboard" element={<Dashboard isAuth={isAuth} />} />
+            <Route
+              path="/meetingroom"
+              element={<Meetingroom isAuth={isAuth} />}
+            />
+          </Routes>
+        </div>
       </Router>
     </Provider>
   );
