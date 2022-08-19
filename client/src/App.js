@@ -6,7 +6,7 @@ import { Login } from "./pages/Login";
 import { Dashboard } from "./pages/Dashboard";
 import { Preferences } from "./pages/Preferences";
 // import { Meetingroom } from "./pages/Meetingroom";
-
+import './App.css';
 import Meetingroom from "./pages/Meetingroom";
 
 import { Provider } from "react-redux";
@@ -28,30 +28,23 @@ function App() {
 
   return (
     <Provider store={store}>
-      <Router className="">
+      <Router className="App">
         <div className="h-screen w-screen bg-slate-600">
-          <nav className="">
+          <nav className="App-header">
             {!isAuth ? (
-              <Link className="" to={"/login"}>
-                {" "}
-                Login{" "}
-              </Link>
-            ) : (
+              <Link className="item" to={"/login"}>Login</Link>):(
               <>
-                <Link to={"/dashboard"} className="">
-                  {" "}
-                  Dashboard{" "}
+                <Link to={"/dashboard"} className="item">
+                  Dashboard
                 </Link>
-                <Link to={"/meetingroom"} className="">
-                  {" "}
-                  Meeting Room{" "}
+                <Link to={"/meetingroom"} className="item">
+                  Meeting Room
                 </Link>
-                <Link to={"/preferences"} className="">
-                  {" "}
-                  Preferences{" "}
+                <Link to={"/preferences"} className="item">
+                  Preferences
                 </Link>
-                <Link to={"/login"} className="" onClick={signuserOut}>
-                  LOG OUT
+                <Link to={"/login"} className="item" onClick={signuserOut}>
+                  Log Out
                 </Link>
               </>
             )}

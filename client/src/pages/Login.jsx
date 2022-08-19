@@ -6,7 +6,7 @@ import firebase from "firebase/compat/app";
 
 export const Login = ({ setIsAuth }) => {
   let navigate = useNavigate();
-  const timetable = [];
+  const timetable = ["10:00", "11:00"];
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider).then((response) => {
       const { isNewUser } = getAdditionalUserInfo(response);
@@ -24,13 +24,9 @@ export const Login = ({ setIsAuth }) => {
           Saturday: timetable,
           Sunday: timetable,
         };
-        firebase
-          .database()
-          .ref("users")
-          .child(uid)
-          .set(timedata)
+        firebase.database().ref("users").child(uid).set(timedata)
           .then((data) => {
-            console.log("Saved Data", data);
+            console.log("Saved Data on login", data);
           })
           .catch((error) => {
             console.log("Storing Error", error);
