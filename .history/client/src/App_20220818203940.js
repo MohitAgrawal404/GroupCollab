@@ -11,7 +11,7 @@ import Meetingroom from "./pages/Meetingroom";
 
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { userReducer } from "./store/reducer";
+import { reducer } from "./store/reducer";
 
 export const store = createStore(userReducer);
 

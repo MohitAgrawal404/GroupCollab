@@ -5,7 +5,7 @@ import { FiTrash2 } from "react-icons/fi";
 import { BiAddToQueue } from "react-icons/bi";
 import { AiOutlineFileDone } from "react-icons/ai";
 
-function TestEvent({
+export const CalendarForm = ({
   newEvent,
   setNewEvent,
   handleAddEvent,
@@ -21,8 +21,8 @@ function TestEvent({
   handleDeleteEvent,
   startTime,
   endTime,
-  checkedEdit
-}) {
+  checkedEdit,
+}) => {
   function addButtonName() {
     if (!edit) {
       return scheduler ? "Add Activity" : "Add Event";
@@ -36,6 +36,7 @@ function TestEvent({
     }
     return scheduler ? "Edit Activity" : "Edit Event";
   }
+
   return (
     <form className="EventForm">
       <h2 className="addEvent-title">{addFormName()}</h2>
@@ -193,6 +194,4 @@ function TestEvent({
       </div>
     </form>
   );
-}
-
-export default TestEvent;
+};

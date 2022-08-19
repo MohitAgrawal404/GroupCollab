@@ -81,11 +81,8 @@ function Meetingroom(props) {
   }, [isStreamSet, isUserSet]);
 
   return (
-    <div>
-      {/* <Videochat /> */}
-      {JSON.stringify(props.user)}
-      {JSON.stringify(props.participant)}
-      {username}
+    <div className="Meetingroom">
+      <MainScreen />
     </div>
   );
 }

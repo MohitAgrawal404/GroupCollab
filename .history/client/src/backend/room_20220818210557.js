@@ -3,7 +3,7 @@ import "firebase/compat/firestore";
 import "firebase/compat/database";
 import database from "firebase/compat/database";
 
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyB0Px6dHZzp8U2PiqSME8vIBG9Zr69gtnQ",
   authDomain: "gcollab-109ba.firebaseapp.com",
   projectId: "gcollab-109ba",
@@ -12,25 +12,24 @@ var firebaseConfig = {
   appId: "1:871201771773:web:63dd9d5b0307b66e4a2e94",
   measurementId: "G-Y1QGH1C4TS",
 };
-// Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
 
 export const db = firebase;
 
-var firepadRef = firebase.database().ref();
-
+let dbref = firebase.database().ref();
+export let connectedref = firebase.database().ref(".info/connected");
 let items = ["A", "B", "C", "D"];
 
 export const userName = items[Math.floor(Math.random() * items.length)];
 
-const urlparams = new URLSearchParams(window.location.search);
-const roomId = urlparams.get("id");
-
-if (roomId) {
-  firepadRef = firepadRef.child(roomId);
+const urlParams = new URLSearchParams(window.location.search);
+const roomID = urlParams.get("id");
+if (roomID) {
+  dbref = dbref.child(roomID);
 } else {
-  firepadRef = firepadRef.push();
-  window.history.replaceState(null, "Meet", "?id=" + firepadRef.key);
+  dbref = dbref.push();
+  window.history.replaceState(null, "Meet", "?id=" + dbref.key);
 }
 
-export default firepadRef;
+export default dbref;
