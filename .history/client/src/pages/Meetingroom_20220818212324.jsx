@@ -20,7 +20,7 @@ function Meetingroom(props) {
     return localStream;
   };
   useEffect(() => {
-    const connectCall = async () => {
+    async function fetch() {
       const stream = await getUserStream();
       stream.getVideoTracks()[0].enabled = false;
       props.setMainStream(stream);
@@ -42,9 +42,9 @@ function Meetingroom(props) {
           userStatusRef.onDisconnect().remove();
         }
       });
-    };
+    }
 
-    connectCall();
+    fetch();
   }, []);
 
   const connectedRef = db.database().ref(".info/connected");

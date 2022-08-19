@@ -11,40 +11,38 @@ import {
 import { connect } from "react-redux";
 
 function Meetingroom(props) {
-  const getUserStream = async () => {
-    const localStream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
-      video: true,
+  // const getUserStream = async () => {
+  //   const localStream = await navigator.mediaDevices.getUserMedia({
+  //     audio: true,
+  //     video: true,
+  //   });
+
+  //   return localStream;
+  // };
+  useEffect(() => {
+    // const stream = await getUserStream();
+    stream.getVideoTracks()[0].enabled = false;
+    props.setMainStream(stream);
+
+    connectedRef.on("value", (snap) => {
+      if (snap.val()) {
+        const defaultPreference = {
+          audio: true,
+          video: false,
+          screen: false,
+        };
+        const userStatusRef = participantRef.push({
+          userName,
+          preferences: defaultPreference,
+        });
+        props.setUser({
+          [userStatusRef.key]: { name: userName, ...defaultPreference },
+        });
+        userStatusRef.onDisconnect().remove();
+      }
     });
 
-    return localStream;
-  };
-  useEffect(() => {
-    const connectCall = async () => {
-      const stream = await getUserStream();
-      stream.getVideoTracks()[0].enabled = false;
-      props.setMainStream(stream);
-
-      connectedRef.on("value", (snap) => {
-        if (snap.val()) {
-          const defaultPreference = {
-            audio: true,
-            video: false,
-            screen: false,
-          };
-          const userStatusRef = participantRef.push({
-            userName,
-            preferences: defaultPreference,
-          });
-          props.setUser({
-            [userStatusRef.key]: { name: userName, ...defaultPreference },
-          });
-          userStatusRef.onDisconnect().remove();
-        }
-      });
-    };
-
-    connectCall();
+    fetch();
   }, []);
 
   const connectedRef = db.database().ref(".info/connected");
