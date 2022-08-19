@@ -205,7 +205,7 @@ export const CalendarEvents = ({ scheduler }) => {
         newEvent.allDay = checked;
       }
       newEvent.id = generateEventId();
-
+      console.log(newEvent.id, newEvent.title, newEvent.start, newEvent.end,newEvent.allDay)
       return true;
     } else if (
       !scheduler &&
@@ -217,6 +217,7 @@ export const CalendarEvents = ({ scheduler }) => {
       newEvent.end = createEndDate();
       newEvent.allDay = checked;
       newEvent.id = generateEventId();
+      console.log(newEvent.id, newEvent.title, newEvent.start, newEvent.end,newEvent.allDay)
       return true;
     }
     return false;
