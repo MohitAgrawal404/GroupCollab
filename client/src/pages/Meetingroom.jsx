@@ -46,10 +46,12 @@ function Meetingroom(props) {
 
   return (
     <div>
-      {/* <Videochat /> */}
-      {JSON.stringify(props.user)}
-      {JSON.stringify(props.participant)}
       {username}
+      <br></br>
+      {/* <Videochat /> */}
+      user: {JSON.stringify(props.user)}
+      <br></br>
+      participant: {JSON.stringify(props)}
     </div>
   );
 }
