@@ -81,12 +81,7 @@ function Meetingroom(props) {
     }
   }, [isStreamSet, isUserSet]);
 
-  return (
-    <div className="Meetingroom">
-      <Videochat />
-      {/* <MainScreen /> */}
-    </div>
-  );
+  return <div className="Meetingroom">{/* <MainScreen /> */}</div>;
 }
 
 const mapStateToProps = (state) => {

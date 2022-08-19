@@ -9,7 +9,6 @@ import {
   updateParticipant,
 } from "../store/actioncreator";
 import { connect } from "react-redux";
-import Videochat from "../component/Videochat";
 
 function Meetingroom(props) {
   const getUserStream = async () => {
@@ -83,8 +82,7 @@ function Meetingroom(props) {
 
   return (
     <div className="Meetingroom">
-      <Videochat />
-      {/* <MainScreen /> */}
+      <MainScreen />
     </div>
   );
 }
