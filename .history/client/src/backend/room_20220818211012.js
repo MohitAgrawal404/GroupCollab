@@ -19,10 +19,7 @@ export const db = firebase;
 
 var firepadRef = firebase.database().ref();
 
-let items = ["A", "B", "C", "D"];
-
-export const userName = items[Math.floor(Math.random() * items.length)];
-
+export const userName = prompt("What's your name?");
 const urlparams = new URLSearchParams(window.location.search);
 const roomId = urlparams.get("id");
 

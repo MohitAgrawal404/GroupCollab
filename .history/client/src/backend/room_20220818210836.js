@@ -1,7 +1,4 @@
-import firebase from "firebase/compat/app";
-import "firebase/compat/firestore";
-import "firebase/compat/database";
-import database from "firebase/compat/database";
+import firebase from "firebase";
 
 var firebaseConfig = {
   apiKey: "AIzaSyB0Px6dHZzp8U2PiqSME8vIBG9Zr69gtnQ",
@@ -19,10 +16,7 @@ export const db = firebase;
 
 var firepadRef = firebase.database().ref();
 
-let items = ["A", "B", "C", "D"];
-
-export const userName = items[Math.floor(Math.random() * items.length)];
-
+export const userName = prompt("What's your name?");
 const urlparams = new URLSearchParams(window.location.search);
 const roomId = urlparams.get("id");
 

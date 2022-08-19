@@ -1,5 +1,5 @@
-import MainScreen from "../components/MainScreen/MainScreen.component";
-import firepadRef, { db, userName } from "../backend/room";
+import MainScreen from "./components/MainScreen/MainScreen.component";
+import firepadRef, { db, userName } from "./server/firebase";
 import { useEffect } from "react";
 import {
   setMainStream,
@@ -7,7 +7,7 @@ import {
   setUser,
   removeParticipant,
   updateParticipant,
-} from "../store/actioncreator";
+} from "./store/actioncreator";
 import { connect } from "react-redux";
 
 function Meetingroom(props) {
@@ -19,32 +19,28 @@ function Meetingroom(props) {
 
     return localStream;
   };
-  useEffect(() => {
-    async function fetch() {
-      const stream = await getUserStream();
-      stream.getVideoTracks()[0].enabled = false;
-      props.setMainStream(stream);
+  useEffect(async () => {
+    const stream = await getUserStream();
+    stream.getVideoTracks()[0].enabled = false;
+    props.setMainStream(stream);
 
-      connectedRef.on("value", (snap) => {
-        if (snap.val()) {
-          const defaultPreference = {
-            audio: true,
-            video: false,
-            screen: false,
-          };
-          const userStatusRef = participantRef.push({
-            userName,
-            preferences: defaultPreference,
-          });
-          props.setUser({
-            [userStatusRef.key]: { name: userName, ...defaultPreference },
-          });
-          userStatusRef.onDisconnect().remove();
-        }
-      });
-    }
-
-    fetch();
+    connectedRef.on("value", (snap) => {
+      if (snap.val()) {
+        const defaultPreference = {
+          audio: true,
+          video: false,
+          screen: false,
+        };
+        const userStatusRef = participantRef.push({
+          userName,
+          preferences: defaultPreference,
+        });
+        props.setUser({
+          [userStatusRef.key]: { name: userName, ...defaultPreference },
+        });
+        userStatusRef.onDisconnect().remove();
+      }
+    });
   }, []);
 
   const connectedRef = db.database().ref(".info/connected");

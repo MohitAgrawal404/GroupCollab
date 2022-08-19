@@ -13,26 +13,12 @@ import {
   updatePreference,
 } from "../backend/peerConnection";
 
+import peerConnection from "../backend/stun";
+
 let defaultUserState = {
   mainStream: null,
   participants: {},
   currentUser: null,
-};
-
-const servers = {
-  iceServers: [
-    {
-      urls: [
-        "stun:stun1.l.google.com:19302",
-        "stun:stun2.l.google.com:19302",
-        "stun:stun.l.google.com:19302",
-        "stun:stun3.l.google.com:19302",
-        "stun:stun4.l.google.com:19302",
-        "stun:stun.services.mozilla.com",
-      ],
-    },
-  ],
-  iceCandidatePoolSize: 10,
 };
 
 const generateColor = () =>
