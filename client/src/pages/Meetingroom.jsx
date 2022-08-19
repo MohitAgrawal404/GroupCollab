@@ -1,14 +1,29 @@
-import MainScreen from "../components/MainScreen/MainScreen.component";
-import firepadRef, { db, userName } from "../backend/room";
-import { useEffect } from "react";
+import MainScreen from '../components/MainScreen/MainScreen.component';
+import firepadRef, { db, userName } from '../backend/room';
+import { useEffect } from 'react';
 import {
   setMainStream,
   addParticipant,
   setUser,
   removeParticipant,
   updateParticipant,
-} from "../store/actioncreator";
-import { connect } from "react-redux";
+} from '../store/actioncreator';
+import { connect } from 'react-redux';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
+const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const uid = user.uid;
+    const email = user.email;
+    const name = user.displayName;
+    console.log(uid);
+    console.log(email);
+    console.log(name);
+  } else {
+    console.log('User is not signed in');
+  }
+});
 
 function Meetingroom(props) {
   const getUserStream = async () => {
@@ -25,7 +40,7 @@ function Meetingroom(props) {
       stream.getVideoTracks()[0].enabled = false;
       props.setMainStream(stream);
 
-      connectedRef.on("value", (snap) => {
+      connectedRef.on('value', (snap) => {
         if (snap.val()) {
           const defaultPreference = {
             audio: true,
@@ -47,19 +62,19 @@ function Meetingroom(props) {
     connectCall();
   }, []);
 
-  const connectedRef = db.database().ref(".info/connected");
-  const participantRef = firepadRef.child("participants");
+  const connectedRef = db.database().ref('.info/connected');
+  const participantRef = firepadRef.child('participants');
 
   const isUserSet = !!props.user;
   const isStreamSet = !!props.stream;
 
   useEffect(() => {
     if (isStreamSet && isUserSet) {
-      participantRef.on("child_added", (snap) => {
+      participantRef.on('child_added', (snap) => {
         const preferenceUpdateEvent = participantRef
           .child(snap.key)
-          .child("preferences");
-        preferenceUpdateEvent.on("child_changed", (preferenceSnap) => {
+          .child('preferences');
+        preferenceUpdateEvent.on('child_changed', (preferenceSnap) => {
           props.updateParticipant({
             [snap.key]: {
               [preferenceSnap.key]: preferenceSnap.val(),
@@ -74,7 +89,7 @@ function Meetingroom(props) {
           },
         });
       });
-      participantRef.on("child_removed", (snap) => {
+      participantRef.on('child_removed', (snap) => {
         props.removeParticipant(snap.key);
       });
     }
