@@ -1,28 +1,28 @@
-import loc from "date-fns/locale/en-US";
-import format from "date-fns/format";
-import getDay from "date-fns/getDay";
-import parse from "date-fns/parse";
-import startOfWeek from "date-fns/startOfWeek";
-import React, { useState } from "react";
-import { Calendar, dateFnsLocalizer } from "react-big-calendar";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import "react-datepicker/dist/react-datepicker.css";
-import "./PagesContent.css";
-import { MdLibraryAdd } from "react-icons/md";
-import { GrUndo } from "react-icons/gr";
-import { CalendarForm } from "./CalendarForm";
-import { ToastContainer, toast } from "react-toastify";
+import loc from 'date-fns/locale/en-US';
+import format from 'date-fns/format';
+import getDay from 'date-fns/getDay';
+import parse from 'date-fns/parse';
+import startOfWeek from 'date-fns/startOfWeek';
+import React, { useState } from 'react';
+import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import 'react-datepicker/dist/react-datepicker.css';
+import './PagesContent.css';
+import { MdLibraryAdd } from 'react-icons/md';
+import { GrUndo } from 'react-icons/gr';
+import { CalendarForm } from './CalendarForm';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import firebase from 'firebase/compat/app';
 
 const iconSize = 30;
 const events = [];
 const activities = [];
 var startTime;
 var endTime;
-
 const handleSuccessNotification = (message) => {
   toast.success(message, {
-    position: "top-right",
+    position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -34,7 +34,7 @@ const handleSuccessNotification = (message) => {
 
 const handleWarningNotification = (message) => {
   toast.warn(message, {
-    position: "top-right",
+    position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -45,14 +45,14 @@ const handleWarningNotification = (message) => {
 };
 
 const customEvent = function (event, start, end, isSelected) {
-  var backgroundColor = "#8E03FB"; //+ event.hexColor;
+  var backgroundColor = '#8E03FB'; //+ event.hexColor;
   var style = {
     backgroundColor: backgroundColor,
-    borderRadius: "5px",
+    borderRadius: '5px',
     opacity: 1,
-    color: "White",
-    border: "0px",
-    display: "block",
+    color: 'White',
+    border: '0px',
+    display: 'block',
   };
   return {
     style: style,
@@ -60,7 +60,7 @@ const customEvent = function (event, start, end, isSelected) {
 };
 
 const locales = {
-  "en-US": loc,
+  'en-US': loc,
 };
 
 const localizer = dateFnsLocalizer({
@@ -72,16 +72,16 @@ const localizer = dateFnsLocalizer({
 });
 
 let formats = {
-  weekdayFormat: "EEE",
-  timeGutterFormat: "HH:mm",
+  weekdayFormat: 'EEE',
+  timeGutterFormat: 'HH:mm',
 };
 
 export const CalendarEvents = ({ scheduler }) => {
   const [newEvent, setNewEvent] = useState({
     id: 0,
-    title: "",
-    start: "",
-    end: "",
+    title: '',
+    start: '',
+    end: '',
     allDay: false,
   });
 
@@ -94,9 +94,9 @@ export const CalendarEvents = ({ scheduler }) => {
   const [edit, setEdit] = useState(false);
   const [formIsOpening, setFormIsOpening] = useState(true);
 
-  const [startTimeValue, onChangeStartTime] = useState("");
-  const [endTimeValue, onChangeEndTime] = useState("");
-
+  const [startTimeValue, onChangeStartTime] = useState('');
+  const [endTimeValue, onChangeEndTime] = useState('');
+  //const [details, setDetails] = useState([]);
   var EventActivityArray = allActivities.concat(allEvents);
 
   const idExist = (id, array) => {
@@ -143,15 +143,15 @@ export const CalendarEvents = ({ scheduler }) => {
 
   function createStartDate() {
     if (
-      newEvent.start !== "" &&
-      startTimeValue !== "" &&
+      newEvent.start !== '' &&
+      startTimeValue !== '' &&
       startTimeValue !== null
     ) {
       var currentStartDate = newEvent.start;
       var startDate = currentStartDate.getDate();
       var startMonth = currentStartDate.getMonth();
       var startYear = currentStartDate.getFullYear();
-      var startTime = startTimeValue.toString().split(":");
+      var startTime = startTimeValue.toString().split(':');
 
       return new Date(
         startYear,
@@ -167,8 +167,8 @@ export const CalendarEvents = ({ scheduler }) => {
   function createEndDate() {
     if (
       (!checked || scheduler) &&
-      (newEvent.end !== "" || scheduler) &&
-      endTimeValue !== "" &&
+      (newEvent.end !== '' || scheduler) &&
+      endTimeValue !== '' &&
       endTimeValue !== null
     ) {
       var currentEndDate;
@@ -184,7 +184,7 @@ export const CalendarEvents = ({ scheduler }) => {
       var endDate = currentEndDate.getDate();
       var endMonth = currentEndDate.getMonth();
       var endYear = currentEndDate.getFullYear();
-      var endTime = endTimeValue.toString().split(":");
+      var endTime = endTimeValue.toString().split(':');
 
       return new Date(endYear, endMonth, endDate, endTime[0], endTime[1]);
     }
@@ -194,7 +194,7 @@ export const CalendarEvents = ({ scheduler }) => {
   function createEvent() {
     if (
       !checked &&
-      newEvent.title !== "" &&
+      newEvent.title !== '' &&
       (createStartDate() !== null) & (createEndDate() !== null)
     ) {
       newEvent.start = createStartDate();
@@ -205,19 +205,62 @@ export const CalendarEvents = ({ scheduler }) => {
         newEvent.allDay = checked;
       }
       newEvent.id = generateEventId();
-      console.log(newEvent.id, newEvent.title, newEvent.start, newEvent.end,newEvent.allDay)
+      console.log(
+        newEvent.id,
+        newEvent.title,
+        newEvent.start,
+        newEvent.end,
+        newEvent.allDay
+      );
+      //setDetails([newEvent.start, newEvent.end]);
+      // const date = new Date(newEvent.start);
+      // const hoursAndMinutes = date.getHours() + ':' + date.getMinutes();
+      // let details = hoursAndMinutes.toString();
+      const details =
+        newEvent.start.toString() + ' - ' + newEvent.end.toString();
+      console.log('detail', details);
+      firebase
+        .database()
+        .ref('details')
+        .child(newEvent.title)
+        .set(details)
+        .then((data) => {
+          console.log('Saved Data', data);
+        })
+        .catch((error) => {
+          console.log('Storing Error', error);
+        });
       return true;
     } else if (
       !scheduler &&
       checked &&
-      newEvent.title !== "" &&
+      newEvent.title !== '' &&
       createStartDate() !== null
     ) {
       newEvent.start = createStartDate();
       newEvent.end = createEndDate();
       newEvent.allDay = checked;
       newEvent.id = generateEventId();
-      console.log(newEvent.id, newEvent.title, newEvent.start, newEvent.end,newEvent.allDay)
+      // console.log(
+      //   newEvent.id,
+      //   newEvent.title,
+      //   newEvent.start,
+      //   newEvent.end,
+      //   newEvent.allDay
+      // );
+      // setDetails([newEvent.start, newEvent.end]);
+      // console.log('detail', details);
+      // firebase
+      //   .database()
+      //   .ref('details')
+      //   .child(newEvent.title)
+      //   .set(details)
+      //   .then((data) => {
+      //     console.log('Saved Data', data);
+      //   })
+      //   .catch((error) => {
+      //     console.log('Storing Error', error);
+      //   });
       return true;
     }
     return false;
@@ -239,13 +282,13 @@ export const CalendarEvents = ({ scheduler }) => {
       var eventIndex = idExist(newEvent.id, allEvents);
       if (eventIndex >= 0) {
         allEvents[eventIndex] = {};
-        handleSuccessNotification("Deleted Successfully");
+        handleSuccessNotification('Deleted Successfully');
       }
     } else {
       var index = idExist(newEvent.id, allActivities);
       if (index >= 0) {
         allActivities[index] = {};
-        handleSuccessNotification("Deleted Successfully");
+        handleSuccessNotification('Deleted Successfully');
       }
     }
     closeForm();
@@ -262,12 +305,12 @@ export const CalendarEvents = ({ scheduler }) => {
           currEvent.start = createStartDate();
           currEvent.end = createEndDate();
           currEvent.allDay = checkedEdit;
-          handleSuccessNotification("Edited Successfully");
+          handleSuccessNotification('Edited Successfully');
           clearForm();
         }
       } else {
         handleWarningNotification(
-          "Start Date-Date Cannot Be Greater Than End Date-Time!"
+          'Start Date-Date Cannot Be Greater Than End Date-Time!'
         );
       }
     } else {
@@ -278,12 +321,12 @@ export const CalendarEvents = ({ scheduler }) => {
           currActivity.title = newEvent.title;
           currActivity.start = createStartDate();
           currActivity.end = createEndDate();
-          handleSuccessNotification("Edited Successfully");
+          handleSuccessNotification('Edited Successfully');
           closeForm();
         }
       } else {
         handleWarningNotification(
-          "Start Time Cannot be Greater Than End Time!"
+          'Start Time Cannot be Greater Than End Time!'
         );
       }
     }
@@ -296,33 +339,33 @@ export const CalendarEvents = ({ scheduler }) => {
         var currentEvent = deepCopy(newEvent);
         if (scheduler) {
           setAllActivities([...allActivities, currentEvent]);
-          handleSuccessNotification("Added Successfully!");
+          handleSuccessNotification('Added Successfully!');
         } else {
           setAllEvents([...allEvents, currentEvent]);
-          handleSuccessNotification("Added Successfully!");
+          handleSuccessNotification('Added Successfully!');
         }
         closeForm();
       } else {
         if (scheduler) {
           handleWarningNotification(
-            "Start Time Cannot Be Greater Than End Time!"
+            'Start Time Cannot Be Greater Than End Time!'
           );
         } else {
           handleWarningNotification(
-            "Start Date-Time Cannot Be Greater Than End Date-Time!"
+            'Start Date-Time Cannot Be Greater Than End Date-Time!'
           );
         }
       }
     } else {
-      handleWarningNotification("Some Fields Are Incomplete.");
+      handleWarningNotification('Some Fields Are Incomplete.');
     }
   }
 
   function clearForm() {
     newEvent.id = 0;
-    newEvent.title = "";
-    newEvent.start = "";
-    newEvent.end = "";
+    newEvent.title = '';
+    newEvent.start = '';
+    newEvent.end = '';
     // startTime = "00:00:00";
     // endTime = "00:00:00";
     // onChangeStartTime("00:00:00");
@@ -348,14 +391,14 @@ export const CalendarEvents = ({ scheduler }) => {
 
   function addButtonName() {
     if (!eventForm) {
-      return scheduler ? "Add Activity" : "Add Event";
+      return scheduler ? 'Add Activity' : 'Add Event';
     }
-    return "Cancel";
+    return 'Cancel';
   }
 
   return (
     <div className="Event">
-      <h1>{scheduler ? "Scheduler" : "Calendar"}</h1>
+      <h1>{scheduler ? 'Scheduler' : 'Calendar'}</h1>
       <button
         className="addEvent-button"
         onClick={formIsOpening ? showForm : closeForm}
@@ -402,8 +445,8 @@ export const CalendarEvents = ({ scheduler }) => {
           scrollToTime={new Date()}
           className="calendar"
           formats={formats}
-          views={["week", "day"]}
-          defaultView={"week"}
+          views={['week', 'day']}
+          defaultView={'week'}
           dayLayoutAlgorithm="no-overlap"
           onDoubleClickEvent={selectedEventActivity}
           eventPropGetter={customEvent}
