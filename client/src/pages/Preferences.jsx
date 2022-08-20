@@ -17,7 +17,7 @@ export const Preferences = () => {
   };
   let auth = getAuth();
   let user = auth.currentUser;
-  let uid = user.uid;
+  let uid = user.displayName;
   console.log(uid);
   const [fetchedData, setfetchedData] = useState(temp);
 

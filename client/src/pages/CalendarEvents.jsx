@@ -14,6 +14,7 @@ import { CalendarForm } from './CalendarForm';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import firebase from 'firebase/compat/app';
+import {GroupInfo} from "./GroupInfo";
 
 const iconSize = 30;
 const events = [];
@@ -467,6 +468,7 @@ export const CalendarEvents = ({ scheduler }) => {
           eventPropGetter={customEvent}
         />
       )}
+        <GroupInfo/>
     </div>
   );
 };

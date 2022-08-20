@@ -11,7 +11,7 @@ export const Login = ({ setIsAuth }) => {
     signInWithPopup(auth, provider).then((response) => {
       const { isNewUser } = getAdditionalUserInfo(response);
       let user = auth.currentUser;
-      let uid = user.uid;
+      let uid = user.displayName;
       if (isNewUser === false) {
         complete();
       } else {
