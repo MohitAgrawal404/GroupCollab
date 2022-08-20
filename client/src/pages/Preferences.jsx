@@ -1,81 +1,98 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useLayoutEffect} from 'react'
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 import "../App.css"
 import firebase from "firebase/compat/app";
-import { getAuth } from "firebase/auth";
-import { auth } from "../backend/firebase";
+import { getAuth, onAuthStateChanged} from "firebase/auth";
 
 export const Preferences = () => {
-  // let user = auth.currentUser;
-  // let uid = user.uid
-  let temp = {}
-  // useEffect ( () => {
-  // firebase.database().ref('users').child(uid).once('value')
-  //     .then((data) => {
-  //         temp = data.val()
-  //         console.log('Fetched Data', fetchedData)
-  //     })
-  //     .catch((error) => {
-  //         console.log('Fetching Error', error)
-  //     })    
-  // }, [])
 
-  const [fetchedData, setfetchedData] = useState(temp)
+  let temp = {
+    Monday: ["10:00", "11:00"],
+    Tuesday: ["10:00", "11:00"],
+    Wednesday: ["10:00", "11:00"],
+    Thursday: ["10:00", "11:00"],
+    Friday: ["10:00", "11:00"],
+    Saturday: ["10:00", "11:00"],
+    Sunday: ["10:00", "11:00"],
+  };
+  let auth = getAuth();
+  let user = auth.currentUser;
+  let uid = user.uid;
+  console.log(uid);
+  const [fetchedData, setfetchedData] = useState(temp);
+
+  useLayoutEffect(() => {
+    firebase.database().ref('users').child(uid).once('value')
+        .then((data) => {
+            setfetchedData(data.val());
+            console.log(temp);
+        })
+        .catch((error) => {
+            console.log('Fetching Error', error)
+        });    
+  }, [])
+
   
 
-  
-  const onMondayChange = (e) => {
-    setfetchedData(fetched => ({
-      ...fetched,
+  let onMondayChange = (e) => {
+    setfetchedData((prevstate) => ({
+      ...prevstate,
       Monday: e
     }));
+    setData(fetchedData);
   }
   const onTuesdayChange = (e) => {
     setfetchedData(fetched => ({
       ...fetched,
       Tuesday: e
     }));
+    setData(fetchedData);
   }
   const onWednesdayChange = (e) => {
     setfetchedData(fetched => ({
       ...fetched,
       Wednesday: e
     }));
+    setData(fetchedData);
   }
   const onThursdayChange = (e) => {
     setfetchedData(fetched => ({
       ...fetched,
       Thursday: e
     }));
+    setData(fetchedData);
   }
   const onFridayChange = (e) => {
     setfetchedData(fetched => ({
       ...fetched,
       Friday: e
     }));
+    setData(fetchedData);
   }
   const onSaturdayChange = (e) => {
     setfetchedData(fetched => ({
       ...fetched,
       Saturday: e
     }));
+    setData(fetchedData);
   }
   const onSundayChange = (e) => {
     setfetchedData(fetched => ({
       ...fetched,
       Sunday: e
     }));
+    setData(fetchedData);
   }
 
-  // useEffect( () => {
-  //   firebase.database().ref('users').child(uid).push(fetchedData)
-  //   .then((data) => {
-  //       console.log('Saved Data', data)
-  //   })
-  //   .catch((error) => {
-  //       console.log('Storing Error', error)
-  //   })    
-  // }, [fetchedData])
+  const setData = (fetched) => {
+    firebase.database().ref('users').child(uid).set(fetched)
+    .then((data) => {
+        console.log('Saved Data', data)
+    })
+    .catch((error) => {
+        console.log('Storing Error', error)
+    })    
+  }
 
   return (
     <div class='container'>
