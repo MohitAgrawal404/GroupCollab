@@ -25,16 +25,16 @@ export const CalendarForm = ({
 }) => {
   function addButtonName() {
     if (!edit) {
-      return scheduler ? "Add Activity" : "Add Event";
+      return scheduler ? "Add Activity" : "Add Availability";
     }
     return "";
   }
 
   function addFormName() {
     if (!edit) {
-      return scheduler ? "Add New Activity" : "Add New Event";
+      return scheduler ? "Add New Activity" : "Add New Availability";
     }
-    return scheduler ? "Edit Activity" : "Edit Event";
+    return scheduler ? "Edit Activity" : "Edit Availability";
   }
 
   return (
@@ -69,7 +69,7 @@ export const CalendarForm = ({
                   id="event-activity-title"
                   name="event-activity-title"
                   type="text"
-                  placeholder={scheduler ? "Activity Title" : "Add Event Title"}
+                  placeholder={scheduler ? "Activity Title" : "Add Title"}
                   value={newEvent.title}
                   onChange={(e) =>
                     setNewEvent({ ...newEvent, title: e.target.value })

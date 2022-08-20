@@ -392,7 +392,7 @@ export const CalendarEvents = ({ scheduler }) => {
 
   function addButtonName() {
     if (!eventForm) {
-      return scheduler ? "Add Activity" : "Add Event";
+      return scheduler ? "Add Activity" : "Add Availability";
     }
     return "Cancel";
   }
