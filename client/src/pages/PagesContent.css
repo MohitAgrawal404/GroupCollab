@@ -4,7 +4,7 @@
   width: calc(100%);
   max-width: 365px;
   min-height: calc(100% - 70%);
-  background: #161a2b;
+  background: #1E293B;
   border-radius: 10px;
   padding-bottom: 32px;
   margin: 40px auto 0px auto;
@@ -26,7 +26,7 @@
 .event-iput {
   padding: 9px 32px 13px 16px;
   border-radius: 4px 0 0 4px;
-  border: 2px solid #5d0cff;
+  border: 2px solid #475569;
   outline: none;
   width: calc(100% - 30%);
   background: transparent;
@@ -69,11 +69,7 @@ label {
   border-radius: 0 4px 4px 0;
   cursor: pointer;
   outline: none;
-  background: linear-gradient(
-    90deg,
-    rgba(93, 12, 255, 1) 0%,
-    rgba(155, 0, 250, 1) 100%
-  );
+  background: #5C6E87;
   color: #fff;
   text-transform: capitalize;
   padding: 4px 7px 4px 7px;
@@ -150,21 +146,13 @@ input[type="checkbox"] {
     padding: 0px 10px 0px 16px;
   }
 
-  .todo-row {
-    display: inline-block;
-    flex-direction: column;
-    justify-content: start;
-  }
   .icons {
     display: flex;
     justify-content: space-evenly;
     margin: 0.5rem 0rem 0rem auto;
     width: 100px;
   }
-  .todo-list-item {
-    max-width: 450px;
-  }
-
+  
   input[type="checkbox"] {
     transform: scale(2.5);
   }
@@ -174,3 +162,4 @@ input[type="checkbox"] {
     border-radius: 4px 0 0 4px;
   }
 }
+
