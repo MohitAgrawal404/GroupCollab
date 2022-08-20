@@ -95,7 +95,15 @@ function Meetingroom(props) {
     }
   }, [isStreamSet, isUserSet]);
 
-  return <div className="Meetingroom">{/* <MainScreen /> */}</div>;
+  return (
+    <div className="Meetingroom">
+      {/* <MainScreen /> */}
+      <iframe
+        src="https://subdomain.whereby.com/room?minimal"
+        allow="camera; microphone; fullscreen; speaker; display-capture"
+      ></iframe>
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => {
