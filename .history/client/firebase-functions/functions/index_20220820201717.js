@@ -79,8 +79,8 @@ exports.eventAdded = functions.firestore
 //await onCreate();
 exports.ev = functions.firestore
   .document("event/{eventId}")
-  .onUpdate((change, context) => {
-    console.log("Event added: ", change.after.data());
+  .onUpdate((snap, context) => {
+    console.log("Event added: ", snap.data());
     let meetingRoom = "";
 
     // const order = {
@@ -88,17 +88,17 @@ exports.ev = functions.firestore
     //   token: "dsafdsafdsafdsafasf",
     // };
     console.log("CHECKING");
-    console.log(change.after.data().roomUrl);
+    console.log(snap.data().roomUrl);
 
     const msg = {
-      to: "victorjosuepimentel21@gmail.com", // Change to your recipient
+      to: "HimohitA@gmail.com", // Change to your recipient
       from: "mohammadnayeem2000@gmail.com", // Change to your verified sender
       subject: "Test Email",
       text: `Your group has scheduled a video chat from ${
-        change.after.data().startTime
-      } to ${
-        change.after.data().endTime
-      }. Click the link to join the meeting: ${change.after.data().roomUrl}.`,
+        snap.data().startTime
+      } to ${snap.data().endTime}. Click the link to join the meeting: ${
+        snap.data().roomUrl
+      }.`,
     };
     sgMail
       .send(msg)

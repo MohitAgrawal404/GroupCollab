@@ -54,51 +54,34 @@ function getResponse() {
 
 exports.eventAdded = functions.firestore
   .document("event/{eventId}")
-  .onCreate(async (snap, context) => {
-    // return event.data.ref.set('world!').then(() => {
-    //     console.log('Write succeeded!');
-    //   });
-
+  .onCreate((snap, context) => {
+    console.log("Event added: ", snap.data());
+    let meetingRoom = "";
     let path = context.params.eventId;
     console.log(path);
     const db = admin.firestore();
+    const order = {
+      orderID: "E2H45JW COMPARE TO",
+      token: "dsafdsafdsafdsafasf",
+    };
+    db.collection(`orders/${path}`).add(order);
 
-    getResponse().then(async (res) => {
-      console.log("Status code:", res.status);
-      const data = await res.json();
-      meetingRoom = data.roomUrl;
-      //   console.log("Room URL:", data.roomUrl);
-      //   console.log("Host room URL:", data.hostRoomUrl);
-      db.collection("event").doc(path).update({ roomUrl: data.roomUrl });
-    });
-
-    return Promise.resolve();
-  });
-
-//   ....
-//await onCreate();
-exports.ev = functions.firestore
-  .document("event/{eventId}")
-  .onUpdate((change, context) => {
-    console.log("Event added: ", change.after.data());
-    let meetingRoom = "";
-
-    // const order = {
-    //   orderID: "E2H45JW COMPARE TO",
-    //   token: "dsafdsafdsafdsafasf",
-    // };
-    console.log("CHECKING");
-    console.log(change.after.data().roomUrl);
-
+    // getResponse().then(async (res) => {
+    //   console.log("Status code:", res.status);
+    //   const data = await res.json();
+    //   meetingRoom = data.roomUrl;
+    //   console.log("Room URL:", data.roomUrl);
+    //   console.log("Host room URL:", data.hostRoomUrl);
+    // });
     const msg = {
-      to: "victorjosuepimentel21@gmail.com", // Change to your recipient
+      to: "HimohitA@gmail.com", // Change to your recipient
       from: "mohammadnayeem2000@gmail.com", // Change to your verified sender
       subject: "Test Email",
       text: `Your group has scheduled a video chat from ${
-        change.after.data().startTime
+        snap.data().startTime
       } to ${
-        change.after.data().endTime
-      }. Click the link to join the meeting: ${change.after.data().roomUrl}.`,
+        snap.data().endTime
+      }. Click the link to join the meeting: ${meetingRoom}.`,
     };
     sgMail
       .send(msg)

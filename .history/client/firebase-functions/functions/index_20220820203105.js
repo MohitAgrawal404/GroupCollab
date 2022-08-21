@@ -91,7 +91,7 @@ exports.ev = functions.firestore
     console.log(change.after.data().roomUrl);
 
     const msg = {
-      to: "victorjosuepimentel21@gmail.com", // Change to your recipient
+      to: "HimohitA@gmail.com", // Change to your recipient
       from: "mohammadnayeem2000@gmail.com", // Change to your verified sender
       subject: "Test Email",
       text: `Your group has scheduled a video chat from ${

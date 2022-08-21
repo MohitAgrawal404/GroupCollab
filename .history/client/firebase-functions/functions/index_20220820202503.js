@@ -8,14 +8,6 @@ sgMail.setApiKey(
   "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"
 );
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
-
 const API_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmFwcGVhci5pbiIsImF1ZCI6Imh0dHBzOi8vYXBpLmFwcGVhci5pbi92MSIsImV4cCI6OTAwNzE5OTI1NDc0MDk5MSwiaWF0IjoxNjYwOTYxOTk2LCJvcmdhbml6YXRpb25JZCI6MTY3MTYxLCJqdGkiOiI3MWIwZjdjMS00NTY3LTQzMDUtOTNmMi1jZDRkOTYzYmU1MGIifQ.Wvcf_My8-Ub50q5ymz6j5c3WrP5fKFoDW6Zlf8RYxb4";
 const data = {
@@ -24,7 +16,6 @@ const data = {
 };
 
 const listAllUsers = (nextPageToken) => {
-  // List batch of users, 1000 at a time.
   getAuth()
     .listUsers(1000, nextPageToken)
     .then((listUsersResult) => {
@@ -32,7 +23,6 @@ const listAllUsers = (nextPageToken) => {
         console.log("user", userRecord.toJSON());
       });
       if (listUsersResult.pageToken) {
-        // List next batch of users.
         listAllUsers(listUsersResult.pageToken);
       }
     })
@@ -55,10 +45,6 @@ function getResponse() {
 exports.eventAdded = functions.firestore
   .document("event/{eventId}")
   .onCreate(async (snap, context) => {
-    // return event.data.ref.set('world!').then(() => {
-    //     console.log('Write succeeded!');
-    //   });
-
     let path = context.params.eventId;
     console.log(path);
     const db = admin.firestore();
@@ -75,23 +61,17 @@ exports.eventAdded = functions.firestore
     return Promise.resolve();
   });
 
-//   ....
-//await onCreate();
 exports.ev = functions.firestore
   .document("event/{eventId}")
   .onUpdate((change, context) => {
     console.log("Event added: ", change.after.data());
     let meetingRoom = "";
 
-    // const order = {
-    //   orderID: "E2H45JW COMPARE TO",
-    //   token: "dsafdsafdsafdsafasf",
-    // };
     console.log("CHECKING");
     console.log(change.after.data().roomUrl);
 
     const msg = {
-      to: "victorjosuepimentel21@gmail.com", // Change to your recipient
+      to: "HimohitA@gmail.com", // Change to your recipient
       from: "mohammadnayeem2000@gmail.com", // Change to your verified sender
       subject: "Test Email",
       text: `Your group has scheduled a video chat from ${

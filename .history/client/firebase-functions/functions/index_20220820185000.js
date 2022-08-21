@@ -55,15 +55,11 @@ function getResponse() {
 exports.eventAdded = functions.firestore
   .document("event/{eventId}")
   .onCreate(async (snap, context) => {
-    // return event.data.ref.set('world!').then(() => {
-    //     console.log('Write succeeded!');
-    //   });
-
     let path = context.params.eventId;
     console.log(path);
     const db = admin.firestore();
 
-    getResponse().then(async (res) => {
+    await getResponse().then(async (res) => {
       console.log("Status code:", res.status);
       const data = await res.json();
       meetingRoom = data.roomUrl;
@@ -71,16 +67,13 @@ exports.eventAdded = functions.firestore
       //   console.log("Host room URL:", data.hostRoomUrl);
       db.collection("event").doc(path).update({ roomUrl: data.roomUrl });
     });
-
-    return Promise.resolve();
+    console.log("url: " + snap.data().roomUrl);
   });
 
-//   ....
-//await onCreate();
 exports.ev = functions.firestore
   .document("event/{eventId}")
-  .onUpdate((change, context) => {
-    console.log("Event added: ", change.after.data());
+  .onCreate((snap, context) => {
+    console.log("Event added: ", snap.data());
     let meetingRoom = "";
 
     // const order = {
@@ -88,17 +81,17 @@ exports.ev = functions.firestore
     //   token: "dsafdsafdsafdsafasf",
     // };
     console.log("CHECKING");
-    console.log(change.after.data().roomUrl);
+    console.log(snap.data().roomUrl);
 
     const msg = {
-      to: "victorjosuepimentel21@gmail.com", // Change to your recipient
+      to: "HimohitA@gmail.com", // Change to your recipient
       from: "mohammadnayeem2000@gmail.com", // Change to your verified sender
       subject: "Test Email",
       text: `Your group has scheduled a video chat from ${
-        change.after.data().startTime
-      } to ${
-        change.after.data().endTime
-      }. Click the link to join the meeting: ${change.after.data().roomUrl}.`,
+        snap.data().startTime
+      } to ${snap.data().endTime}. Click the link to join the meeting: ${
+        snap.data().roomUrl
+      }.`,
     };
     sgMail
       .send(msg)
