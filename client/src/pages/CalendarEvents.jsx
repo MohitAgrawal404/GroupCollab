@@ -17,7 +17,7 @@ import firebase from "firebase/compat/app";
 import { GroupInfo } from "./GroupInfo";
 import { doc, setDoc } from "firebase/firestore";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
-
+import {db} from "../backend/firebase"
 const iconSize = 30;
 const events = [];
 const activities = [];
@@ -219,10 +219,11 @@ export const CalendarEvents = ({ scheduler }) => {
       // const date = new Date(newEvent.start);
       // const hoursAndMinutes = date.getHours() + ':' + date.getMinutes();
       // let details = hoursAndMinutes.toString();
-      const db = getFirestore(app);
+      
       const dbRef = collection(db, "event");
-      const details =
-        newEvent.start.toString() + " - " + newEvent.end.toString();
+      const start = newEvent.start.toString();
+      const end = newEvent.end.toString();
+      const details = {"startTime": start, "endTime": end};
       addDoc(dbRef, details)
         .then((docRef) => {
           console.log("Document has been added successfully");
