@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-datepicker/dist/react-datepicker.css";
-import './PagesContent.css';
+import "./PagesContent.css";
 import { MdLibraryAdd } from "react-icons/md";
 import { GrUndo } from "react-icons/gr";
 import { CalendarForm } from "./CalendarForm";
@@ -15,6 +15,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import firebase from "firebase/compat/app";
 import { GroupInfo } from "./GroupInfo";
+import { doc, setDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 const iconSize = 30;
 const events = [];
@@ -217,9 +219,18 @@ export const CalendarEvents = ({ scheduler }) => {
       // const date = new Date(newEvent.start);
       // const hoursAndMinutes = date.getHours() + ':' + date.getMinutes();
       // let details = hoursAndMinutes.toString();
+      const db = getFirestore(app);
+      const dbRef = collection(db, "event");
       const details =
         newEvent.start.toString() + " - " + newEvent.end.toString();
-      console.log("detail", details);
+      addDoc(dbRef, details)
+        .then((docRef) => {
+          console.log("Document has been added successfully");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
       firebase
         .database()
         .ref("details")
@@ -400,7 +411,9 @@ export const CalendarEvents = ({ scheduler }) => {
   return (
     <div className="Event ">
       <div className="bg-white dark:bg-slate-600">
-        <h1 className="text-gray-900 dark:text-white">{scheduler ? "Scheduler" : "Calendar"}</h1>
+        <h1 className="text-gray-900 dark:text-white">
+          {scheduler ? "Scheduler" : "Calendar"}
+        </h1>
         <button
           className="addEvent-button"
           onClick={formIsOpening ? showForm : closeForm}
@@ -460,7 +473,7 @@ export const CalendarEvents = ({ scheduler }) => {
             events={allEvents}
             startAccessor="start"
             endAccessor="end"
-            style={{ height: 1050, color: "white"}}
+            style={{ height: 1050, color: "white" }}
             scrollToTime={new Date()}
             className="calendar"
             formats={formats}
