@@ -10,6 +10,8 @@ import {
 } from "../store/actioncreator";
 import { connect } from "react-redux";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { collection, query, where} from "firebase/firestore"; 
+
 
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
@@ -62,12 +64,16 @@ function Meetingroom(props) {
     connectCall();
   }, []);
 
-  const connectedRef = db.database().ref(".info/connected");
+  const connectedRef = db.database().ref("event");
   const participantRef = firepadRef.child("participants");
 
   const isUserSet = !!props.user;
   const isStreamSet = !!props.stream;
-
+  let link = null;
+   let user = auth.currentUser;
+  const email = user.email;
+ 
+  
   useEffect(() => {
     if (isStreamSet && isUserSet) {
       participantRef.on("child_added", (snap) => {
@@ -95,17 +101,7 @@ function Meetingroom(props) {
     }
   }, [isStreamSet, isUserSet]);
 
-  return (
-    <div className="Meetingroom">
-      {/* <MainScreen /> */}
-
-      <iframe
-        class="w-full aspect-video"
-        src="https://g-collab.whereby.com/52186aab-2f6d-4b38-a0ec-3d763bea3ee2"
-        allow="camera; microphone; fullscreen; speaker; display-capture"
-      ></iframe>
-    </div>
-  );
+  return <div className="Meetingroom">{/* <MainScreen /> */}</div>;
 }
 
 const mapStateToProps = (state) => {

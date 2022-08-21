@@ -18,6 +18,8 @@ import { GroupInfo } from "./GroupInfo";
 import { doc, setDoc } from "firebase/firestore";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import {db} from "../backend/firebase"
+import { auth, provider } from "../backend/firebase";
+
 const iconSize = 30;
 const events = [];
 const activities = [];
@@ -223,7 +225,9 @@ export const CalendarEvents = ({ scheduler }) => {
       const dbRef = collection(db, "event");
       const start = newEvent.start.toString();
       const end = newEvent.end.toString();
-      const details = {"startTime": start, "endTime": end};
+      let user = auth.currentUser;
+      let email = user.email;
+      const details = {"startTime": start, "endTime": end, "email": email};
       addDoc(dbRef, details)
         .then((docRef) => {
           console.log("Document has been added successfully");
