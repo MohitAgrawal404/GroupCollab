@@ -1,6 +1,6 @@
 import MainScreen from "../components/MainScreen/MainScreen.component";
-import firepadRef, { db, userName } from "../backend/room";
-import { useEffect } from "react";
+import firepadRef, {db, userName } from "../backend/room";
+import { useEffect, useState } from "react";
 import {
   setMainStream,
   addParticipant,
@@ -10,7 +10,8 @@ import {
 } from "../store/actioncreator";
 import { connect } from "react-redux";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { collection, query, where} from "firebase/firestore"; 
+import { collection, query, where, getDocs, } from "firebase/firestore"; 
+import firebase from "firebase/compat/app";
 
 
 const auth = getAuth();
@@ -69,10 +70,25 @@ function Meetingroom(props) {
 
   const isUserSet = !!props.user;
   const isStreamSet = !!props.stream;
-  let link = null;
-   let user = auth.currentUser;
-  const email = user.email;
- 
+  // let link = null;
+  // let user = auth.currentUser;
+  // const email = user.email;
+  // const eventref = firebase.firestore().collection(connectedRef).get();
+  // eventref.forEach((item) => {
+  //   if (item == email){
+  //     link = 
+  //   }
+  // })
+  // const workCollectionRef = collection(db, "event");
+  // const [events, setEvents] = useState([]);
+  // useEffect(() => {
+  //   const getEvent = async () => {
+  //     const event = await getDocs(workCollectionRef);
+  //     setEvents(event.docs.map((doc) => ({...doc.data(), id: doc.id})) );
+  //   };
+  //   getEvent();
+  // }, [])
+  // console.log(events);
   
   useEffect(() => {
     if (isStreamSet && isUserSet) {
@@ -101,7 +117,11 @@ function Meetingroom(props) {
     }
   }, [isStreamSet, isUserSet]);
 
-  return <div className="Meetingroom">{/* <MainScreen /> */}</div>;
+  return <div className="Meetingroom"><iframe
+  class="w-full aspect-video"
+  src="https://g-collab.whereby.com/081a9665-d42a-42a3-97d1-95196e877dc1"
+  allow="camera; microphone; fullscreen; speaker; display-capture"
+></iframe></div>;
 }
 
 const mapStateToProps = (state) => {
@@ -122,3 +142,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Meetingroom);
+//https://g-collab.whereby.com/081a9665-d42a-42a3-97d1-95196e877dc1

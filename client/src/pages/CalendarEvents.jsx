@@ -17,7 +17,7 @@ import firebase from "firebase/compat/app";
 import { GroupInfo } from "./GroupInfo";
 import { doc, setDoc } from "firebase/firestore";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
-import {db} from "../backend/firebase"
+import {db, firestore} from "../backend/firebase"
 import { auth, provider } from "../backend/firebase";
 
 const iconSize = 30;
@@ -228,6 +228,8 @@ export const CalendarEvents = ({ scheduler }) => {
       let user = auth.currentUser;
       let email = user.email;
       const details = {"startTime": start, "endTime": end, "email": email};
+      firestore.collection("event").doc(email).set(details); 
+    
       addDoc(dbRef, details)
         .then((docRef) => {
           console.log("Document has been added successfully");
