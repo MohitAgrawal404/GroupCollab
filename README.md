@@ -14,7 +14,7 @@ Create a new Meeting by selecting a date as well as a start and end time. When a
 
 ![New Meeting](https://github.com/MohitAgrawal404/GroupCollab/blob/main/READMEIMAGESMEETINGROOM/Screen%20Shot%202022-09-27%20at%208.09.05%20PM.png?raw=true)
 
-![Email via SendGrid](https://github.com/MohitAgrawal404/GroupCollab/blob/main/READMEIMAGESMEETINGROOM/Screen%20Shot%202022-09-27%20at%208.09.05%20PM.png?raw=true)
+![Email via SendGrid](https://github.com/MohitAgrawal404/GroupCollab/blob/main/READMEIMAGESMEETINGROOM/Screen%20Shot%202022-09-27%20at%208.43.07%20PM.png?raw=true)
 
 ## Set Your Meeting Time Preferences
 
