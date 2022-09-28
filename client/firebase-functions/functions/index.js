@@ -5,7 +5,7 @@ const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
 
 sgMail.setApiKey(
-  "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"
+  "Enter Sendgrid api key"
 );
 
 // // Create and Deploy Your First Cloud Functions
@@ -17,7 +17,7 @@ sgMail.setApiKey(
 // });
 
 const API_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmFwcGVhci5pbiIsImF1ZCI6Imh0dHBzOi8vYXBpLmFwcGVhci5pbi92MSIsImV4cCI6OTAwNzE5OTI1NDc0MDk5MSwiaWF0IjoxNjYwOTYxOTk2LCJvcmdhbml6YXRpb25JZCI6MTY3MTYxLCJqdGkiOiI3MWIwZjdjMS00NTY3LTQzMDUtOTNmMi1jZDRkOTYzYmU1MGIifQ.Wvcf_My8-Ub50q5ymz6j5c3WrP5fKFoDW6Zlf8RYxb4";
+  "Enter whereby api key";
 const data = {
   endDate: "2099-02-18T14:23:00.000Z",
   fields: ["hostRoomUrl"],
